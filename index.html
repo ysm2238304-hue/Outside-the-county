@@ -35,7 +35,7 @@
   </script>
   
   <style>
-    /* iOS 安全區域 Safe Area 適配 */
+    /* iOS 安全區域 (Safe Area) 適配 */
     :root {
       --sat: env(safe-area-inset-top, 0px);
       --sab: env(safe-area-inset-bottom, 0px);
@@ -47,7 +47,7 @@
       -webkit-tap-highlight-color: transparent;
       -webkit-touch-callout: none;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      padding-top: var(--sat);
+      padding-top: 0;
       padding-bottom: calc(var(--sab) + 5rem);
       user-select: none;
       background-color: #F8FAFC;
@@ -57,13 +57,19 @@
     .glass-vip-header {
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      background: linear-gradient(180deg, rgba(6, 78, 59, 0.96) 0%, rgba(4, 120, 87, 0.90) 100%);
+      background: linear-gradient(180deg, rgba(6, 78, 59, 0.96) 0%, rgba(4, 120, 87, 0.92) 100%);
     }
 
     .glass-vip-nav {
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       background-color: rgba(255, 255, 255, 0.94);
+    }
+
+    .live-glass {
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.90) 100%);
     }
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -79,20 +85,21 @@
 
   <!-- 頂部尊榮導航列 -->
   <header class="fixed top-0 left-0 right-0 z-40 glass-vip-header text-white shadow-md border-b border-emerald-700/40" style="padding-top: var(--sat);">
-    <div class="px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-2.5">
-        <span class="p-2 bg-white/10 rounded-2xl border border-white/20 shadow-inner">
+    <div class="px-3.5 py-2.5 flex items-center justify-between gap-2">
+      <div class="flex items-center space-x-2.5 min-w-0 flex-1">
+        <span class="p-2 bg-white/10 rounded-2xl border border-white/20 shadow-inner flex-shrink-0">
           <svg class="w-5 h-5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
           </svg>
         </span>
-        <div>
-          <h1 class="text-lg font-black text-white tracking-tight leading-tight">115年智慧公廁交流暨永續參訪</h1>
+        <div class="min-w-0">
+          <h1 class="text-base sm:text-lg font-black text-white tracking-tight leading-snug truncate">115年智慧公廁交流暨永續參訪</h1>
+          <p class="text-[10px] text-emerald-200/90 font-medium truncate">南投縣政府跨局處觀摩貴賓專屬指南</p>
         </div>
       </div>
 
       <!-- 一鍵隨團秘書服務窗口 (長官遇狀況直撥) -->
-      <button onclick="openSecretaryModal()" class="tap-effect px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white rounded-2xl flex items-center gap-1.5 text-xs font-bold shadow-md border border-amber-300/40">
+      <button onclick="openSecretaryModal()" class="tap-effect px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white rounded-2xl flex items-center gap-1.5 text-xs font-bold shadow-md border border-amber-300/40 whitespace-nowrap flex-shrink-0">
         <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
           <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"/>
         </svg>
@@ -101,62 +108,50 @@
     </div>
   </header>
 
-  <!-- 頂部留白 -->
-  <div class="h-16"></div>
+  <!-- 內容佔位頂高 (依 iOS 安全區域動態計算 + 16px 呼吸懸浮間距，徹底解決黏邊問題) -->
+  <div style="height: calc(var(--sat) + 68px);" class="w-full"></div>
 
   <!-- 主內容容器 -->
-  <main class="flex-1 px-4 py-3 max-w-lg mx-auto w-full space-y-4">
+  <main class="flex-1 px-3.5 py-2.5 max-w-lg mx-auto w-full space-y-4">
 
     <!-- TAB 1: 參訪行程 (Agenda & Executive Live) -->
     <section id="vtab-agenda" class="space-y-3.5">
       
-      <!-- 低碳永續隨身溫馨提醒卡 (取代原證書卡底部說明) -->
-      <div class="text-xs text-emerald-950 bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 p-3 rounded-2xl border border-emerald-200/80 shadow-2xs flex items-start gap-2.5">
+      <!-- 低碳永續隨身溫馨提醒卡 -->
+      <div class="text-xs text-emerald-950 bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 p-3 rounded-2xl border border-emerald-200/80 shadow-sm flex items-start gap-2.5">
         <span class="text-base flex-shrink-0">🌿</span>
         <div class="leading-relaxed">
           <strong class="text-emerald-900 font-black">低碳永續響應提醒：</strong>
-          本次入住之旅宿落實環保標章政策<strong>不提供一次性盥洗用品</strong>。若有備品需求或餐飲調整，請隨時點選右上角聯繫隨團秘書。
+          本次入住旅宿落實環保標章政策<strong>不提供一次性盥洗用品</strong>。若有備品需求或餐飲微調，請隨時點選右上角聯繫隨團秘書。
         </div>
       </div>
 
-      <!-- 即時政務焦點卡 (Now & Next) -->
-      <div id="vipLiveCard" class="bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950 text-white rounded-3xl p-4 shadow-lg border border-slate-700/60 space-y-3">
-        <div class="flex items-center justify-between border-b border-slate-700/60 pb-2">
-          <div class="flex items-center space-x-2">
-            <span class="flex h-2.5 w-2.5 relative">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-            </span>
-            <span class="text-xs font-black tracking-wider text-emerald-300">行程動態 · EXECUTIVE LIVE</span>
-          </div>
-          <span id="vipCurrentTimeText" class="text-xs font-mono text-slate-300 font-bold">即時更新</span>
-        </div>
-
-        <!-- 當前進行 -->
-        <div class="space-y-1">
-          <div class="flex items-center justify-between">
-            <span id="vipStatusBadge" class="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-500 text-slate-950">NOW 當前站點</span>
-            <span id="vipCountdownText" class="text-xs font-bold text-amber-300">行程倒數中</span>
-          </div>
-          <h3 id="vipNowTitle" class="text-base font-black text-white leading-snug">南投縣政府縣民廣場 (出發集合)</h3>
-          <p id="vipNowLocation" class="text-xs text-slate-300">📍 南投縣南投市中興路660號 (08:00 - 08:30)</p>
-        </div>
-
-        <!-- 下一站預告 -->
-        <div id="vipNextRow" class="pt-2 border-t border-slate-700/60 flex items-center justify-between text-xs">
-          <div class="flex items-center gap-2">
-            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-sky-300 border border-slate-600">NEXT</span>
-            <span id="vipNextTitle" class="font-bold text-slate-200">高雄-國立科學工藝博物館</span>
-          </div>
-          <span id="vipNextTime" class="text-slate-400 font-mono font-bold">10:50</span>
-        </div>
-      </div>
+      <!-- 即時政務焦點卡容器 (EXECUTIVE LIVE · NOW & NEXT 智慧比對引擎) -->
+      <div id="vipLiveCardContainer"></div>
 
       <!-- 3 日行程切換器 -->
       <div class="bg-slate-200/80 p-1 rounded-2xl flex items-center text-xs font-bold text-slate-600 shadow-inner">
         <button onclick="switchVipDay(1)" id="vipDayBtn-1" class="flex-1 py-2 text-center rounded-xl bg-white text-emerald-800 shadow-sm transition-all">第一天 9/9(三)</button>
         <button onclick="switchVipDay(2)" id="vipDayBtn-2" class="flex-1 py-2 text-center rounded-xl transition-all">第二天 9/10(四)</button>
         <button onclick="switchVipDay(3)" id="vipDayBtn-3" class="flex-1 py-2 text-center rounded-xl transition-all">第三天 9/11(五)</button>
+      </div>
+
+      <!-- 遊覽車與司機尊榮聯絡卡 -->
+      <div class="bg-white border border-slate-200/80 p-3 rounded-2xl flex items-center justify-between text-xs shadow-sm">
+        <div class="flex items-center gap-2.5">
+          <span class="p-2 bg-amber-100 text-amber-800 rounded-xl font-bold text-base">🚌</span>
+          <div>
+            <div class="font-bold text-slate-800 flex items-center gap-1.5">
+              <span>本次座車：</span>
+              <span class="font-mono text-emerald-800 font-black px-1.5 py-0.5 bg-emerald-50 rounded border border-emerald-200">KAA-5836</span>
+            </div>
+            <div class="text-[11px] text-slate-500 mt-0.5">隨車司機：張雋泓 先生 (0911-107351)</div>
+          </div>
+        </div>
+        <a href="tel:0911107351" class="tap-effect px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold shadow-sm flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"/></svg>
+          <span>撥打</span>
+        </a>
       </div>
 
       <!-- 行程內容清單容器 -->
@@ -205,8 +200,8 @@
   </nav>
 
   <!-- 彈跳視窗：隨團專屬秘書服務 (Secretary Modal) -->
-  <div id="secretaryModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-sm w-full p-5 shadow-2xl space-y-4">
+  <div id="secretaryModal" onclick="handleBackdropClick(event, 'secretaryModal')" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-5 shadow-2xl space-y-4 animate-scale-up" onclick="event.stopPropagation()">
       <div class="flex items-center justify-between border-b pb-3 border-slate-100">
         <div class="flex items-center space-x-2">
           <span class="p-2 bg-amber-100 text-amber-800 rounded-2xl font-bold">🛎️</span>
@@ -215,12 +210,21 @@
             <p class="text-[11px] text-slate-500">大立環境科技服務小組全程在線</p>
           </div>
         </div>
-        <button onclick="closeModal('secretaryModal')" class="p-1.5 text-slate-400 hover:text-slate-600 rounded-full">
+        <button onclick="closeModal('secretaryModal')" class="p-2 -mr-2 text-slate-400 hover:text-slate-600 rounded-full">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
 
       <div class="space-y-2.5">
+        <!-- 隨車司機窗口 -->
+        <a href="tel:0911107351" class="tap-effect flex items-center justify-between p-3 rounded-2xl bg-amber-50/80 border border-amber-200">
+          <div>
+            <div class="text-xs font-bold text-amber-900">張雋泓 先生 (遊覽車 KAA-5836)</div>
+            <div class="text-[11px] text-slate-500">主責：全團交通接駁、隨車上下定位</div>
+          </div>
+          <span class="px-3 py-1.5 bg-amber-600 text-white rounded-xl text-xs font-bold shadow-sm">撥打專線</span>
+        </a>
+
         <a href="tel:0977228459" class="tap-effect flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-200">
           <div>
             <div class="text-xs font-bold text-slate-800">陳宛君 計畫工程師</div>
@@ -247,8 +251,13 @@
     </div>
   </div>
 
+  <!-- iOS 輕量 Toast 提示 -->
+  <div id="toast" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-slate-900/90 text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg transition-all duration-300 opacity-0 pointer-events-none text-center max-w-[85vw]">
+    已完成
+  </div>
+
   <script>
-    // 3 日精華行程資料庫 (專注於長官即時查閱與導航)
+    // 3 日精華行程資料庫 (已校準最新網址、車牌、司機資訊與名坂奇介紹)
     const VIP_SCHEDULE = [
       {
         day: 1,
@@ -259,7 +268,7 @@
             time: "08:00 - 08:30",
             title: "南投縣政府縣民廣場 (集合、出發)",
             location: "南投縣南投市中興路660號",
-            desc: "長官同仁集合出發，備有麥當勞暖胃早餐與茶水。",
+            desc: "長官同仁集合出發，備有麥當勞暖胃早餐與茶水。本次座車：KAA-5836（司機：張雋泓 0911-107351）。",
             mapQuery: "南投縣政府縣民廣場",
             badge: "出發集合"
           },
@@ -316,7 +325,7 @@
             time: "08:30",
             title: "晨間集合出發 (旅人驛站大廳)",
             location: "旅人驛站-鐵道館大廳",
-            desc: "大廳領取麥味登外送元氣早餐，整裝出發。",
+            desc: "大廳領取麥味登元氣早餐（由宜佳、韻如分發），08:30 全員準時出發。",
             badge: "晨間集合"
           },
           {
@@ -335,7 +344,7 @@
             desc: "觀摩地方政府推動生廚餘資源化、減塑及聯合國 SDGs 具體成果。",
             mapQuery: "台東永續方舟館",
             badge: "SDGs循環經濟",
-            officialUrl: "https://ttceeac.taitung.gov.tw/"
+            officialUrl: "https://www.zztaitung.com/21352/ttepb-3"
           },
           {
             time: "11:40 - 12:40",
@@ -351,7 +360,8 @@
             location: "臺東縣臺東市中興路二段191號",
             desc: "老糖廠空間再造與地方創生公共設施結合案例。",
             mapQuery: "台東糖廠文化創意產業園區",
-            badge: "空間活化"
+            badge: "空間活化",
+            officialUrl: "https://www.taisugar.com.tw/"
           },
           {
             time: "15:20 - 16:10",
@@ -359,7 +369,8 @@
             location: "臺東縣大武鄉環港路56號",
             desc: "南迴公路代表性休息站，體驗友善公廁與地方農特產展銷。",
             mapQuery: "大武之心南迴驛",
-            badge: "公路驛站示範"
+            badge: "公路驛站示範",
+            officialUrl: "https://tour.taitung.gov.tw/zh-tw/attraction/details/1375"
           },
           {
             time: "17:30 - 18:30",
@@ -395,7 +406,7 @@
             time: "09:30",
             title: "大廳集合出發",
             location: "墾丁凱撒大飯店大廳",
-            desc: "辦理退房，行李由工作小組協助搬運上車。",
+            desc: "辦理退房，行李由工作小組協助搬運上車，09:30 準時發車前往海生館。",
             badge: "退房出發"
           },
           {
@@ -417,11 +428,12 @@
           },
           {
             time: "15:00 - 15:40",
-            title: "台南-名坂奇洋菓子",
+            title: "特色物產：台南-名坂奇洋菓子",
             location: "臺南市東區裕信路321號",
-            desc: "在地特色烘焙創生伴手禮。",
+            desc: "源於2007年，以專注於夏威夷豆塔的製作而聞名，成為台南知名伴手禮名店。",
             mapQuery: "名坂奇洋菓子",
-            badge: "特色物產"
+            badge: "特色物產",
+            officialUrl: "https://www.minbenchi.com.tw/"
           },
           {
             time: "15:40~",
@@ -434,7 +446,7 @@
       }
     ];
 
-    // 參訪景點導覽資料庫 (圖文精華、觀摩重點與官方網站)
+    // 參訪景點導覽資料庫
     const VIP_INSIGHTS = [
       {
         title: "大鵬灣國家風景區：AIoT 智慧公廁系統",
@@ -457,7 +469,7 @@
         emoji: "🌱",
         location: "臺東縣臺東市臨海路一段525號",
         scheduleTime: "9/10(四) 10:10 - 11:30",
-        officialUrl: "https://ttceeac.taitung.gov.tw/",
+        officialUrl: "https://www.zztaitung.com/21352/ttepb-3",
         summary: "以聯合國永續發展目標 (SDGs) 為藍圖，生動呈現地方政府在廢棄物自主處理、生廚餘資源化與減塑推廣的具體政績。",
         keyPoints: [
           "生廚餘黑水虻循環：推動高效生物堆肥，將農業果菜殘渣轉化為高品質有機肥料。",
@@ -506,12 +518,261 @@
           "無痕步道動線：保留單斜脊與海洋節理自然紋理，透過非侵入式架高步道兼顧安全與地質保護。"
         ],
         takeaway: "適合南投縣高山潮濕林區及戶外風景區步道、景觀公廁耐用硬體採購標準參考。"
+      },
+      {
+        title: "台東糖廠文化創意產業園區",
+        badge: "空間活化低碳地景",
+        emoji: "🏭",
+        location: "臺東縣臺東市中興路二段191號",
+        scheduleTime: "9/10(四) 13:00 - 14:00",
+        officialUrl: "https://www.taisugar.com.tw/",
+        summary: "公營事業歷史資產轉型為地方創生園區，保留歷史工業紋理並融入友善如廁設施與在地工藝。",
+        keyPoints: [
+          "老舊建物活化：在歷史建築限制下兼顧無障礙設施與通風採光改造。",
+          "地方創生聚落：整合在地農林文創，創造永續觀光附加價值。"
+        ],
+        takeaway: "借鏡舊有公有廳舍與歷史建物在公共衛生設備升級上的改造手法。"
+      },
+      {
+        title: "大武之心南迴驛：南迴綠能公路驛站",
+        badge: "友善通用公路驛站",
+        emoji: "🌊",
+        location: "臺東縣大武鄉環港路56號",
+        scheduleTime: "9/10(四) 15:20 - 16:10",
+        officialUrl: "https://tour.taitung.gov.tw/zh-tw/attraction/details/1375",
+        summary: "南迴公路最具規模之指標型休息驛站，提供大客車停等空間、在地小農市集與五星友善公廁。",
+        keyPoints: [
+          "高流量公廁分流：以色彩與清晰動線引導遊客，有效縮短連假高峰如廁排隊時間。",
+          "地方共好經濟：設有在地特色物產專區，推動低碳短程供應鏈。"
+        ],
+        takeaway: "可作為南投縣台 14 線、台 21 線重要公路休憩站點之規劃借鏡。"
+      },
+      {
+        title: "台南名坂奇洋菓子：在地特色物產伴手禮",
+        badge: "地方品牌與包裝減量",
+        emoji: "🧁",
+        location: "臺南市東區裕信路321號",
+        scheduleTime: "9/11(五) 15:00 - 15:40",
+        officialUrl: "https://www.minbenchi.com.tw/",
+        summary: "源於2007年，以專注於夏威夷豆塔的製作而聞名，成為台南知名伴手禮名店。",
+        keyPoints: [
+          "特色物產補給：公務交流之特色物產停靠站點。",
+          "低碳包裝推動：探討伴手禮精緻化與包裝減塑減量之實踐平衡。"
+        ],
+        takeaway: "借鏡地方農特產加工品品牌塑模與文創包裝永續概念。"
       }
     ];
 
     let currentVipDay = 1;
+    let vipDemoMode = 'REAL';
+    let vipEggClicks = 0;
+    let vipLastClickTime = 0;
+    let showVipDemoControls = false;
+
+    function getAllVipEvents() {
+      const events = [];
+      const dateMap = { 1: "2026-09-09", 2: "2026-09-10", 3: "2026-09-11" };
+
+      VIP_SCHEDULE.forEach(dayGroup => {
+        const dateStr = dateMap[dayGroup.day];
+        dayGroup.items.forEach(item => {
+          let startH = 8, startM = 0, endH = 9, endM = 0;
+          const rawTime = item.time.trim();
+
+          if (rawTime.includes("-")) {
+            const parts = rawTime.split("-");
+            const sParts = parts[0].trim().split(":");
+            const eParts = parts[1].trim().replace("~", "").split(":");
+            startH = parseInt(sParts[0], 10);
+            startM = parseInt(sParts[1], 10);
+            endH = parseInt(eParts[0], 10);
+            endM = parseInt(eParts[1], 10);
+          } else if (rawTime.includes("~")) {
+            const sParts = rawTime.replace("~", "").trim().split(":");
+            startH = parseInt(sParts[0], 10);
+            startM = parseInt(sParts[1], 10);
+            endH = Math.min(23, startH + 2);
+            endM = 0;
+          } else {
+            const sParts = rawTime.split(":");
+            startH = parseInt(sParts[0], 10);
+            startM = parseInt(sParts[1], 10);
+            endH = startH;
+            endM = startM + 30;
+            if (endM >= 60) { endH += 1; endM -= 60; }
+          }
+
+          const startDate = new Date(`${dateStr}T${String(startH).padStart(2, '0')}:${String(startM).padStart(2, '0')}:00+08:00`);
+          const endDate = new Date(`${dateStr}T${String(endH).padStart(2, '0')}:${String(endM).padStart(2, '0')}:00+08:00`);
+
+          events.push({
+            day: dayGroup.day,
+            startDate,
+            endDate,
+            time: item.time,
+            title: item.title,
+            location: item.location,
+            desc: item.desc,
+            mapQuery: item.mapQuery,
+            badge: item.badge
+          });
+        });
+      });
+
+      return events.sort((a, b) => a.startDate - b.startDate);
+    }
+
+    function renderExecutiveLive() {
+      const container = document.getElementById('vipLiveCardContainer');
+      if (!container) return;
+
+      const events = getAllVipEvents();
+      let nowTime;
+
+      if (vipDemoMode === 'DEMO_D1_MORNING') {
+        nowTime = new Date("2026-09-09T08:15:00+08:00");
+      } else if (vipDemoMode === 'DEMO_D1_DAPENG') {
+        nowTime = new Date("2026-09-09T14:45:00+08:00");
+      } else if (vipDemoMode === 'DEMO_D2_ARK') {
+        nowTime = new Date("2026-09-10T10:30:00+08:00");
+      } else if (vipDemoMode === 'DEMO_D3_NMMBA') {
+        nowTime = new Date("2026-09-11T10:45:00+08:00");
+      } else {
+        nowTime = new Date();
+      }
+
+      let currentEvent = null;
+      let nextEvent = null;
+      let statusType = 'DURING';
+
+      const firstEvent = events[0];
+      const lastEvent = events[events.length - 1];
+
+      if (nowTime < firstEvent.startDate) {
+        statusType = 'BEFORE';
+        nextEvent = firstEvent;
+      } else if (nowTime > lastEvent.endDate) {
+        statusType = 'AFTER';
+        currentEvent = lastEvent;
+      } else {
+        for (let i = 0; i < events.length; i++) {
+          if (nowTime >= events[i].startDate && nowTime <= events[i].endDate) {
+            currentEvent = events[i];
+            nextEvent = events[i + 1] || null;
+            break;
+          }
+          if (nowTime < events[i].startDate) {
+            nextEvent = events[i];
+            currentEvent = events[i - 1] || null;
+            break;
+          }
+        }
+      }
+
+      let countdownText = "";
+      if (statusType === 'BEFORE') {
+        const diffMs = firstEvent.startDate - nowTime;
+        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+        const diffDays = Math.floor(diffHours / 24);
+        countdownText = diffDays > 0 ? `距離出發尚有 ${diffDays} 天` : `距離出發尚有 ${diffHours} 小時`;
+      } else if (statusType === 'DURING' && currentEvent) {
+        const remainingMs = Math.max(0, currentEvent.endDate - nowTime);
+        const remainingMins = Math.ceil(remainingMs / (1000 * 60));
+        countdownText = `進行中 · 剩餘 ${remainingMins} 分鐘`;
+      } else if (statusType === 'AFTER') {
+        countdownText = "交流圓滿賦歸";
+      }
+
+      let html = `
+        <div class="live-glass text-white rounded-3xl p-4 shadow-xl border border-slate-700/60 space-y-3 relative overflow-hidden">
+          <div class="flex items-center justify-between border-b border-slate-700/60 pb-2.5">
+            <div onclick="handleVipEasterEgg()" class="tap-effect flex items-center space-x-2 cursor-pointer select-none" title="連續點擊 3 次解鎖時空演練">
+              <span class="flex h-2.5 w-2.5 relative">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              <span class="text-xs font-black tracking-wider text-emerald-300">行程動態 · EXECUTIVE LIVE</span>
+            </div>
+
+            <div class="flex items-center gap-1.5">
+              ${showVipDemoControls ? `
+                <select onchange="changeVipDemoMode(this.value)" class="bg-slate-800 text-[11px] font-bold text-slate-200 rounded-xl px-2 py-1 border border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-400">
+                  <option value="REAL" ${vipDemoMode === 'REAL' ? 'selected' : ''}>即時模式 (系統時間)</option>
+                  <option value="DEMO_D1_MORNING" ${vipDemoMode === 'DEMO_D1_MORNING' ? 'selected' : ''}>演練: 9/9 縣民廣場出發 (08:15)</option>
+                  <option value="DEMO_D1_DAPENG" ${vipDemoMode === 'DEMO_D1_DAPENG' ? 'selected' : ''}>演練: 9/9 大鵬灣智慧公廁 (14:45)</option>
+                  <option value="DEMO_D2_ARK" ${vipDemoMode === 'DEMO_D2_ARK' ? 'selected' : ''}>演練: 9/10 台東永續方舟 (10:30)</option>
+                  <option value="DEMO_D3_NMMBA" ${vipDemoMode === 'DEMO_D3_NMMBA' ? 'selected' : ''}>演練: 9/11 屏東海生館 (10:45)</option>
+                </select>
+                <button onclick="toggleVipDemoControls(false)" class="tap-effect p-1 text-slate-400 hover:text-white text-xs">✕</button>
+              ` : (vipDemoMode !== 'REAL' ? `
+                <button onclick="changeVipDemoMode('REAL')" class="tap-effect text-[10px] font-bold px-2 py-0.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                  <span>⚠️ 演練中</span> <span class="underline">切回即時</span>
+                </button>
+              ` : `
+                <span class="text-xs font-mono text-emerald-300 font-bold">${new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false })}</span>
+              `)}
+            </div>
+          </div>
+      `;
+
+      if (statusType === 'BEFORE') {
+        html += `
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">行程即將啟航</span>
+              <span class="text-xs font-bold text-amber-300">${countdownText}</span>
+            </div>
+            <h3 class="text-sm font-black text-white leading-snug">${nextEvent ? nextEvent.title : '南投縣政府縣民廣場集合'}</h3>
+            <p class="text-xs text-slate-300">首站地點：${nextEvent ? nextEvent.location : '南投縣南投市中興路660號'} (08:00 - 08:30)</p>
+          </div>
+        `;
+      } else {
+        html += `
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black tracking-wider px-2 py-0.5 rounded-md bg-emerald-500 text-slate-950">NOW 當前站點</span>
+              <span class="text-xs font-bold text-emerald-300">${countdownText}</span>
+            </div>
+            <h3 class="text-sm font-black text-white leading-snug">${currentEvent ? currentEvent.title : '公務參訪進行中'}</h3>
+            <div class="flex items-center justify-between text-xs text-slate-300">
+              <span class="truncate max-w-[210px]">📍 ${currentEvent ? currentEvent.location : ''}</span>
+              <span class="text-[11px] font-mono text-slate-400 font-bold">${currentEvent ? currentEvent.time : ''}</span>
+            </div>
+          </div>
+
+          ${nextEvent ? `
+            <div class="pt-2 border-t border-slate-700/60 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-sky-300 border border-slate-600">NEXT</span>
+                <span class="font-bold text-slate-200 truncate max-w-[180px]">${nextEvent.title}</span>
+              </div>
+              <span class="text-[11px] text-slate-400 font-mono font-bold">${nextEvent.time}</span>
+            </div>
+          ` : `
+            <div class="pt-2 border-t border-slate-700/60 text-[11px] text-slate-400">已達本次行程最後站點，即將圓滿賦歸</div>
+          `}
+        `;
+      }
+
+      html += `
+          <div class="pt-1 flex items-center justify-between">
+            <div class="text-[10px] text-slate-400">系統即時動態比對</div>
+            ${currentEvent && currentEvent.mapQuery ? `
+              <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(currentEvent.mapQuery)}" target="_blank"
+                 class="tap-effect text-xs font-bold px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl flex items-center gap-1 shadow-sm">
+                <span>開啟導航</span> &rarr;
+              </a>
+            ` : ''}
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    }
 
     function renderVipTimeline() {
+      renderExecutiveLive();
+
       const container = document.getElementById('vipTimelineList');
       if (!container) return;
 
@@ -540,7 +801,7 @@
 
             ${item.officialUrl ? `
               <a href="${item.officialUrl}" target="_blank" class="tap-effect text-xs text-slate-600 font-bold hover:text-emerald-800 flex items-center gap-0.5">
-                <span>🌐 查看官方展覽</span> &rarr;
+                <span>🌐 查看官方介紹</span> &rarr;
               </a>
             ` : ''}
           </div>
@@ -621,6 +882,7 @@
       });
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
+      if (tabId === 'agenda') renderVipTimeline();
       if (tabId === 'insights') renderVipInsights();
     }
 
@@ -639,24 +901,62 @@
     function closeModal(id) {
       const modal = document.getElementById(id);
       if (modal) {
-        modal.classList.remove('hidden');
+        modal.classList.remove('flex');
         modal.classList.add('hidden');
       }
     }
 
-    function updateExecutiveLive() {
-      const timeText = document.getElementById('vipCurrentTimeText');
-      if (timeText) {
-        const now = new Date();
-        timeText.innerText = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    function handleBackdropClick(event, modalId) {
+      if (event.target.id === modalId) {
+        closeModal(modalId);
       }
+    }
+
+    function handleVipEasterEgg() {
+      const now = Date.now();
+      if (now - vipLastClickTime > 1500) {
+        vipEggClicks = 1;
+      } else {
+        vipEggClicks++;
+      }
+      vipLastClickTime = now;
+
+      if (vipEggClicks >= 3) {
+        showVipDemoControls = !showVipDemoControls;
+        vipEggClicks = 0;
+        renderExecutiveLive();
+        showToast(showVipDemoControls ? "🛠️ 已解鎖【時空演練選單】" : "🔒 已收合【時空演練選單】");
+      }
+    }
+
+    function toggleVipDemoControls(show) {
+      showVipDemoControls = show;
+      renderExecutiveLive();
+    }
+
+    function changeVipDemoMode(mode) {
+      vipDemoMode = mode;
+      renderExecutiveLive();
+      showToast(mode === 'REAL' ? "已切回【系統真實時間】" : "已切換為【模擬時空演練】");
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.innerText = msg;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2200);
     }
 
     window.onload = function() {
       renderVipTimeline();
       renderVipInsights();
-      updateExecutiveLive();
-      setInterval(updateExecutiveLive, 30000);
+      // 每 30 秒自動刷新一次焦點卡動態
+      setInterval(renderExecutiveLive, 30000);
     };
   </script>
 </body>
