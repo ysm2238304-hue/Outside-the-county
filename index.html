@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>115年跨局處永續發展交流暨智慧公廁參訪 - 貴賓手冊</title>
+  
+  <!-- iOS Web App 專用獨立全螢幕配置 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="貴賓參訪手冊">
+  <meta name="theme-color" content="#064e3b">
+  
+  <!-- 載入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            vip: {
+              bg: '#F8FAFC',
+              card: '#FFFFFF',
+              primary: '#064E3B',    // 南投深林青竹
+              emerald: '#059669',    // 永續翡翠綠
+              gold: '#D97706',       // 尊榮琥珀金
+              accent: '#B45309',
+              slate: '#1E293B',
+              soft: '#F1F5F9'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    /* iOS 安全區域 Safe Area 適配 */
+    :root {
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
+      --sal: env(safe-area-inset-left, 0px);
+      --sar: env(safe-area-inset-right, 0px);
+    }
+    
+    body {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding-top: var(--sat);
+      padding-bottom: calc(var(--sab) + 5rem);
+      user-select: none;
+      background-color: #F8FAFC;
+    }
+
+    /* 尊榮磨砂毛玻璃 */
+    .glass-vip-header {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: linear-gradient(180deg, rgba(6, 78, 59, 0.96) 0%, rgba(4, 120, 87, 0.90) 100%);
+    }
+
+    .glass-vip-nav {
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      background-color: rgba(255, 255, 255, 0.94);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .tap-effect:active {
+      transform: scale(0.98);
+      transition: transform 0.12s ease;
+    }
+  </style>
+</head>
+<body class="text-slate-800 min-h-full flex flex-col antialiased">
+
+  <!-- 頂部尊榮導航列 -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-vip-header text-white shadow-md border-b border-emerald-700/40" style="padding-top: var(--sat);">
+    <div class="px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-2.5">
+        <span class="p-2 bg-white/10 rounded-2xl border border-white/20 shadow-inner">
+          <svg class="w-5 h-5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
+        </span>
+        <div>
+          <h1 class="text-lg font-black text-white tracking-tight leading-tight">115年智慧公廁交流暨永續參訪</h1>
+        </div>
+      </div>
+
+      <!-- 一鍵隨團秘書服務窗口 (長官遇狀況直撥) -->
+      <button onclick="openSecretaryModal()" class="tap-effect px-3 py-1.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white rounded-2xl flex items-center gap-1.5 text-xs font-bold shadow-md border border-amber-300/40">
+        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"/>
+        </svg>
+        <span>隨團秘書</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 頂部留白 -->
+  <div class="h-16"></div>
+
+  <!-- 主內容容器 -->
+  <main class="flex-1 px-4 py-3 max-w-lg mx-auto w-full space-y-4">
+
+    <!-- TAB 1: 參訪行程 (Agenda & Executive Live) -->
+    <section id="vtab-agenda" class="space-y-3.5">
+      
+      <!-- 低碳永續隨身溫馨提醒卡 (取代原證書卡底部說明) -->
+      <div class="text-xs text-emerald-950 bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 p-3 rounded-2xl border border-emerald-200/80 shadow-2xs flex items-start gap-2.5">
+        <span class="text-base flex-shrink-0">🌿</span>
+        <div class="leading-relaxed">
+          <strong class="text-emerald-900 font-black">低碳永續響應提醒：</strong>
+          本次入住之旅宿落實環保標章政策<strong>不提供一次性盥洗用品</strong>。若有備品需求或餐飲調整，請隨時點選右上角聯繫隨團秘書。
+        </div>
+      </div>
+
+      <!-- 即時政務焦點卡 (Now & Next) -->
+      <div id="vipLiveCard" class="bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950 text-white rounded-3xl p-4 shadow-lg border border-slate-700/60 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-700/60 pb-2">
+          <div class="flex items-center space-x-2">
+            <span class="flex h-2.5 w-2.5 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+            <span class="text-xs font-black tracking-wider text-emerald-300">行程動態 · EXECUTIVE LIVE</span>
+          </div>
+          <span id="vipCurrentTimeText" class="text-xs font-mono text-slate-300 font-bold">即時更新</span>
+        </div>
+
+        <!-- 當前進行 -->
+        <div class="space-y-1">
+          <div class="flex items-center justify-between">
+            <span id="vipStatusBadge" class="text-[10px] font-black px-2 py-0.5 rounded-md bg-emerald-500 text-slate-950">NOW 當前站點</span>
+            <span id="vipCountdownText" class="text-xs font-bold text-amber-300">行程倒數中</span>
+          </div>
+          <h3 id="vipNowTitle" class="text-base font-black text-white leading-snug">南投縣政府縣民廣場 (出發集合)</h3>
+          <p id="vipNowLocation" class="text-xs text-slate-300">📍 南投縣南投市中興路660號 (08:00 - 08:30)</p>
+        </div>
+
+        <!-- 下一站預告 -->
+        <div id="vipNextRow" class="pt-2 border-t border-slate-700/60 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-sky-300 border border-slate-600">NEXT</span>
+            <span id="vipNextTitle" class="font-bold text-slate-200">高雄-國立科學工藝博物館</span>
+          </div>
+          <span id="vipNextTime" class="text-slate-400 font-mono font-bold">10:50</span>
+        </div>
+      </div>
+
+      <!-- 3 日行程切換器 -->
+      <div class="bg-slate-200/80 p-1 rounded-2xl flex items-center text-xs font-bold text-slate-600 shadow-inner">
+        <button onclick="switchVipDay(1)" id="vipDayBtn-1" class="flex-1 py-2 text-center rounded-xl bg-white text-emerald-800 shadow-sm transition-all">第一天 9/9(三)</button>
+        <button onclick="switchVipDay(2)" id="vipDayBtn-2" class="flex-1 py-2 text-center rounded-xl transition-all">第二天 9/10(四)</button>
+        <button onclick="switchVipDay(3)" id="vipDayBtn-3" class="flex-1 py-2 text-center rounded-xl transition-all">第三天 9/11(五)</button>
+      </div>
+
+      <!-- 行程內容清單容器 -->
+      <div id="vipTimelineList" class="space-y-3"></div>
+    </section>
+
+    <!-- TAB 2: 景點導覽 (Attractions Guide) -->
+    <section id="vtab-insights" class="space-y-4 hidden">
+      <div class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 p-4 rounded-3xl shadow-sm">
+        <div class="flex items-center gap-2">
+          <span class="p-2 bg-emerald-800 text-white rounded-2xl text-lg">🗺️</span>
+          <div>
+            <h2 class="text-sm font-black text-emerald-950">參訪景點導覽與觀摩特色</h2>
+            <p class="text-[11px] text-slate-600">彙整各站自然生態、AIoT 智慧公廁與永續低碳示範場域亮點</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 景點導覽場域清單 -->
+      <div id="vipInsightsList" class="space-y-3.5"></div>
+    </section>
+
+  </main>
+
+  <!-- 底部 VIP 專屬 2-Tab 簡約導航列 -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 glass-vip-nav border-t border-slate-200/80 shadow-lg" style="padding-bottom: var(--sab);">
+    <div class="max-w-lg mx-auto flex items-center justify-around py-2 px-6">
+      
+      <!-- Tab 1: 參訪行程 -->
+      <button onclick="switchVipTab('agenda')" id="vnav-agenda" class="tap-effect flex flex-col items-center justify-center flex-1 py-1.5 text-emerald-800">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        <span class="text-xs font-black mt-0.5">參訪行程</span>
+      </button>
+
+      <!-- Tab 2: 景點導覽 -->
+      <button onclick="switchVipTab('insights')" id="vnav-insights" class="tap-effect flex flex-col items-center justify-center flex-1 py-1.5 text-slate-400 hover:text-slate-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+        </svg>
+        <span class="text-xs font-bold mt-0.5">景點導覽</span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- 彈跳視窗：隨團專屬秘書服務 (Secretary Modal) -->
+  <div id="secretaryModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-5 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b pb-3 border-slate-100">
+        <div class="flex items-center space-x-2">
+          <span class="p-2 bg-amber-100 text-amber-800 rounded-2xl font-bold">🛎️</span>
+          <div>
+            <h3 class="text-base font-black text-slate-900">隨團專屬秘書服務</h3>
+            <p class="text-[11px] text-slate-500">大立環境科技服務小組全程在線</p>
+          </div>
+        </div>
+        <button onclick="closeModal('secretaryModal')" class="p-1.5 text-slate-400 hover:text-slate-600 rounded-full">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="space-y-2.5">
+        <a href="tel:0977228459" class="tap-effect flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-200">
+          <div>
+            <div class="text-xs font-bold text-slate-800">陳宛君 計畫工程師</div>
+            <div class="text-[11px] text-slate-500">主責：住宿飯店、各館導覽、總協調</div>
+          </div>
+          <span class="px-3 py-1.5 bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm">撥打專線</span>
+        </a>
+
+        <a href="tel:0919057275" class="tap-effect flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-200">
+          <div>
+            <div class="text-xs font-bold text-slate-800">吳宜佳 計畫工程師</div>
+            <div class="text-[11px] text-slate-500">主責：餐廳用餐、智慧公廁參訪安排</div>
+          </div>
+          <span class="px-3 py-1.5 bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm">撥打專線</span>
+        </a>
+      </div>
+
+      <div class="pt-1">
+        <a href="https://line.me/ti/g/CUUB5QP47D" target="_blank" class="tap-effect w-full py-3 bg-[#06C755] text-white rounded-2xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm">
+          <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M24 10.3c0-4.6-4.9-8.3-11-8.3S2 5.7 2 10.3c0 4.1 3.6 7.6 8.6 8.2.3.1.8.2.9.6.1.3.1.8 0 1.1 0 0-.2 1.2-.2 1.4-.1.4-.3 1.6 1.4.9 1.7-.7 9.2-5.4 9.2-8.2"/></svg>
+          <span>進入 LINE 官方交流群組</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 3 日精華行程資料庫 (專注於長官即時查閱與導航)
+    const VIP_SCHEDULE = [
+      {
+        day: 1,
+        date: "09/09 (三)",
+        summary: "南投出發 → 高雄科工館 → 大鵬灣智慧公廁 → 抵達台東",
+        items: [
+          {
+            time: "08:00 - 08:30",
+            title: "南投縣政府縣民廣場 (集合、出發)",
+            location: "南投縣南投市中興路660號",
+            desc: "長官同仁集合出發，備有麥當勞暖胃早餐與茶水。",
+            mapQuery: "南投縣政府縣民廣場",
+            badge: "出發集合"
+          },
+          {
+            time: "10:50 - 12:20",
+            title: "高雄-國立科學工藝博物館",
+            location: "高雄市三民區九如一路720號",
+            desc: "南台灣首座綠博物館常設館，參訪環境保護與氣候變遷展區。",
+            mapQuery: "國立科學工藝博物館",
+            badge: "綠博物館示範",
+            officialUrl: "https://www.nstm.gov.tw/"
+          },
+          {
+            time: "12:40 - 13:30",
+            title: "午餐：新台灣原味懷舊餐廳",
+            location: "高雄市鼓山區美明路148號",
+            desc: "享用在地人文懷舊特色料理。",
+            mapQuery: "新台灣原味懷舊餐廳 高雄館",
+            badge: "特色午餐"
+          },
+          {
+            time: "14:30 - 15:30",
+            title: "屏東-大鵬灣國家風景區 (智慧公廁核心觀摩)",
+            location: "屏東縣東港鎮大潭路169號",
+            desc: "觀摩全台指標 AIoT 物聯網公廁設備：人流統計、耗材自動監測、氨氣異味排風聯動。",
+            mapQuery: "大鵬灣國家風景區遊客中心",
+            badge: "智慧公廁核心",
+            officialUrl: "https://www.dbnsa.gov.tw/"
+          },
+          {
+            time: "18:20 - 19:00",
+            title: "晚餐：台東-米巴奈山地美食坊",
+            location: "臺東縣臺東市傳廣路470號",
+            desc: "品嚐台東在地特色原住民合菜風味餐。",
+            mapQuery: "米巴奈山地美食坊",
+            badge: "特色晚餐"
+          },
+          {
+            time: "19:30~",
+            title: "入住：台東 旅人驛站-鐵道館",
+            location: "臺東縣臺東市鐵花路296號",
+            desc: "抵達飯店辦理入住，漫步鐵花村文創商圈。提醒：全館落實環保標章不提供一次性備品。",
+            mapQuery: "旅人驛站 鐵道館",
+            badge: "飯店入住"
+          }
+        ]
+      },
+      {
+        day: 2,
+        date: "09/10 (四)",
+        summary: "小野柳地質公園 → 台東永續方舟館 → 糖廠文創 → 抵達墾丁凱撒",
+        items: [
+          {
+            time: "08:30",
+            title: "晨間集合出發 (旅人驛站大廳)",
+            location: "旅人驛站-鐵道館大廳",
+            desc: "大廳領取麥味登外送元氣早餐，整裝出發。",
+            badge: "晨間集合"
+          },
+          {
+            time: "09:00 - 10:00",
+            title: "富岡地質公園 (小野柳)",
+            location: "臺東縣臺東市松江路一段500號",
+            desc: "奇岩海岸地質景觀，觀摩海岸生態保育與步道抗鹽耐蝕工法。",
+            mapQuery: "富岡地質公園 小野柳",
+            badge: "地質生態保育",
+            officialUrl: "https://www.eastcoast-nsa.gov.tw/"
+          },
+          {
+            time: "10:10 - 11:30",
+            title: "台東永續方舟館 (指標基地)",
+            location: "臺東縣臺東市臨海路一段525號",
+            desc: "觀摩地方政府推動生廚餘資源化、減塑及聯合國 SDGs 具體成果。",
+            mapQuery: "台東永續方舟館",
+            badge: "SDGs循環經濟",
+            officialUrl: "https://ttceeac.taitung.gov.tw/"
+          },
+          {
+            time: "11:40 - 12:40",
+            title: "午餐：打鹿岸原住民人文主題餐廳",
+            location: "臺東縣臺東市吉林路二段590號",
+            desc: "享受東海岸在地人文料理。",
+            mapQuery: "打鹿岸原住民人文主題餐廳",
+            badge: "特色午餐"
+          },
+          {
+            time: "13:00 - 14:00",
+            title: "台東糖廠文化創意產業園區",
+            location: "臺東縣臺東市中興路二段191號",
+            desc: "老糖廠空間再造與地方創生公共設施結合案例。",
+            mapQuery: "台東糖廠文化創意產業園區",
+            badge: "空間活化"
+          },
+          {
+            time: "15:20 - 16:10",
+            title: "大武之心南迴驛",
+            location: "臺東縣大武鄉環港路56號",
+            desc: "南迴公路代表性休息站，體驗友善公廁與地方農特產展銷。",
+            mapQuery: "大武之心南迴驛",
+            badge: "公路驛站示範"
+          },
+          {
+            time: "17:30 - 18:30",
+            title: "晚餐：恆春-曾家小棧",
+            location: "屏東縣恆春鎮省北路二段558號",
+            desc: "恆春在地美味合菜饗宴。",
+            mapQuery: "曾家小棧",
+            badge: "特色晚餐"
+          },
+          {
+            time: "19:00~",
+            title: "入住：屏東 墾丁凱撒大飯店",
+            location: "屏東縣恆春鎮墾丁路6號",
+            desc: "入住五星級環保標章休閒飯店，享受客房舒適設施。房卡已由秘書小組先期對接備妥。",
+            mapQuery: "墾丁凱撒大飯店",
+            badge: "五星旅宿"
+          }
+        ]
+      },
+      {
+        day: 3,
+        date: "09/11 (五)",
+        summary: "墾丁凱撒退房 → 國立海洋生物博物館 → 枋山蔥蔥鵝午餐 → 賦歸南投",
+        items: [
+          {
+            time: "08:00 - 09:30",
+            title: "飯店悠閒享用自助早餐",
+            location: "墾丁凱撒大飯店餐廳",
+            desc: "享用飯店豐盛自助早餐，享受晨間渡假氛圍。",
+            badge: "飯店早餐"
+          },
+          {
+            time: "09:30",
+            title: "大廳集合出發",
+            location: "墾丁凱撒大飯店大廳",
+            desc: "辦理退房，行李由工作小組協助搬運上車。",
+            badge: "退房出發"
+          },
+          {
+            time: "10:10 - 12:00",
+            title: "屏東-國立海洋生物博物館",
+            location: "屏東縣車城鄉後灣路2號",
+            desc: "全台最大海洋生態殿堂，推薦欣賞 10:30 觸摸池或 11:00 與魚共舞/企鵝餵食解說。",
+            mapQuery: "國立海洋生物博物館",
+            badge: "海洋永續保育",
+            officialUrl: "https://www.nmmba.gov.tw/"
+          },
+          {
+            time: "12:30 - 13:30",
+            title: "午餐：枋山-蔥蔥鵝屏東枋山店",
+            location: "屏東縣枋山鄉中山路三段50號",
+            desc: "品嚐枋山道地鵝肉特色合菜。",
+            mapQuery: "蔥蔥鵝 屏東枋山店",
+            badge: "在地合菜"
+          },
+          {
+            time: "15:00 - 15:40",
+            title: "台南-名坂奇洋菓子",
+            location: "臺南市東區裕信路321號",
+            desc: "在地特色烘焙創生伴手禮。",
+            mapQuery: "名坂奇洋菓子",
+            badge: "特色物產"
+          },
+          {
+            time: "15:40~",
+            title: "圓滿賦歸南投",
+            location: "南投縣政府縣民廣場",
+            desc: "返抵南投縣府，圓滿完成 3 日公務交流與智慧公廁參訪行。",
+            badge: "交流圓滿"
+          }
+        ]
+      }
+    ];
+
+    // 參訪景點導覽資料庫 (圖文精華、觀摩重點與官方網站)
+    const VIP_INSIGHTS = [
+      {
+        title: "大鵬灣國家風景區：AIoT 智慧公廁系統",
+        badge: "智慧公廁觀摩核心",
+        emoji: "🚻",
+        location: "屏東縣東港鎮大潭路169號",
+        scheduleTime: "9/9(三) 14:30 - 15:30",
+        officialUrl: "https://www.dbnsa.gov.tw/",
+        summary: "全台風景區導入物聯網感測標竿。整合人流計數、耗材餘量及異味感測連動抽風，實現以數據為導向的『智慧派工』。",
+        keyPoints: [
+          "異味自動排風：氨氣 (NH3) 與硫化氫 (H2S) 超標即刻全速排風，平均 2 分鐘內恢復清新空氣品質。",
+          "動態精準派工：累積使用達 80 人次自動推播派遣清潔員，解決假日時段巡邏空窗難題。",
+          "通用平權設施：配備緊急聯網求助鈴、無障礙照護床與防滑地磚，營造友善如廁環境。"
+        ],
+        takeaway: "可借鏡於南投縣日月潭、清境農場等假日高承載風景區公廁之設備升級改造。"
+      },
+      {
+        title: "台東永續方舟館：SDGs 在地實踐與循環經濟",
+        badge: "環境永續指標基地",
+        emoji: "🌱",
+        location: "臺東縣臺東市臨海路一段525號",
+        scheduleTime: "9/10(四) 10:10 - 11:30",
+        officialUrl: "https://ttceeac.taitung.gov.tw/",
+        summary: "以聯合國永續發展目標 (SDGs) 為藍圖，生動呈現地方政府在廢棄物自主處理、生廚餘資源化與減塑推廣的具體政績。",
+        keyPoints: [
+          "生廚餘黑水虻循環：推動高效生物堆肥，將農業果菜殘渣轉化為高品質有機肥料。",
+          "沉浸數位互動：將複雜的環保數據轉化為直覺互動裝置，兼具教育與政策展示效益。"
+        ],
+        takeaway: "可作為南投縣發展茶產業有機廢棄物、竹林剩餘資材生質能循環再利用之推廣範本。"
+      },
+      {
+        title: "國立海洋生物博物館：海洋生態多樣性與永續保育",
+        badge: "海洋保育示範教育",
+        emoji: "🐋",
+        location: "屏東縣車城鄉後灣路2號",
+        scheduleTime: "9/11(五) 10:10 - 12:00",
+        officialUrl: "https://www.nmmba.gov.tw/",
+        summary: "台灣規模最大之海洋生態殿堂。全方位展示台灣水域、珊瑚王國與世界水域，宣導源頭減塑及海洋資源永續觀念。",
+        keyPoints: [
+          "特色解說時段：參訪期間推薦欣賞 10:30 觸摸池開放、11:00 珊瑚王國與魚共舞或企鵝餵食解說。",
+          "大型場館管理：觀摩高密度遊客承載下之高頻清潔派工、雨水中水回收與場館節能低碳策略。"
+        ],
+        takeaway: "借鏡其大型公眾場域之動線導引規劃與源頭減塑（全面不提供一次性塑膠袋）推行策略。"
+      },
+      {
+        title: "國立科學工藝博物館：綠博物館示範營運",
+        badge: "公共建築節能低碳",
+        emoji: "🏛️",
+        location: "高雄市三民區九如一路720號",
+        scheduleTime: "9/9(三) 10:50 - 12:20",
+        officialUrl: "https://www.nstm.gov.tw/",
+        summary: "南台灣首座國立社教機構，致力落實『綠博物館 (Green Museum)』願景，展示環境保護與全球氣候變遷專區。",
+        keyPoints: [
+          "智慧能源排程：常設展區照明與中央空調連動客流感測，展區無人時自動降載 40%。",
+          "中水雨水再利用：全館建立完整雨水收集與雜排水過濾系統，室外景觀綠地灌溉 100% 零自來水消耗。"
+        ],
+        takeaway: "可供本縣工務處及各鄉鎮市公所公有展館改善既有建築能耗之規劃參考。"
+      },
+      {
+        title: "富岡地質公園 (小野柳)：海岸地質保育與耐候工法",
+        badge: "地質生態與耐候維護",
+        emoji: "🪨",
+        location: "臺東縣臺東市松江路一段500號",
+        scheduleTime: "9/10(四) 09:00 - 10:00",
+        officialUrl: "https://www.eastcoast-nsa.gov.tw/",
+        summary: "東部海岸厚層砂岩與頁岩互層之奇岩地景，觀摩高鹽、強海風極端天候環境下之公共步道抗腐蝕工法。",
+        keyPoints: [
+          "抗腐蝕硬體規格：公廁五金與解說護欄全面採用 SUS 316 不鏽鋼規格與抗鹽耐候仿木工法。",
+          "無痕步道動線：保留單斜脊與海洋節理自然紋理，透過非侵入式架高步道兼顧安全與地質保護。"
+        ],
+        takeaway: "適合南投縣高山潮濕林區及戶外風景區步道、景觀公廁耐用硬體採購標準參考。"
+      }
+    ];
+
+    let currentVipDay = 1;
+
+    function renderVipTimeline() {
+      const container = document.getElementById('vipTimelineList');
+      if (!container) return;
+
+      const dayData = VIP_SCHEDULE.find(d => d.day === currentVipDay);
+      if (!dayData) return;
+
+      container.innerHTML = dayData.items.map(item => `
+        <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200/70 relative">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black px-2.5 py-0.5 rounded-lg bg-emerald-800 text-amber-300 tracking-wide font-mono">${item.time}</span>
+            <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200/80 px-2 py-0.5 rounded-full">${item.badge}</span>
+          </div>
+
+          <h3 class="text-sm font-black text-slate-900 mt-2">${item.title}</h3>
+          <p class="text-xs text-slate-600 mt-1 leading-relaxed">${item.desc}</p>
+          <div class="text-[11px] text-slate-400 mt-1">📍 ${item.location}</div>
+
+          <div class="pt-2 mt-2 border-t border-slate-100 flex items-center justify-between">
+            ${item.mapQuery ? `
+              <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.mapQuery)}" target="_blank"
+                 class="tap-effect text-xs text-emerald-800 font-bold flex items-center gap-1 bg-emerald-50 px-3 py-1 rounded-xl border border-emerald-200">
+                <svg class="w-3.5 h-3.5 text-emerald-700" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+                <span>開啟導航地圖</span>
+              </a>
+            ` : '<span></span>'}
+
+            ${item.officialUrl ? `
+              <a href="${item.officialUrl}" target="_blank" class="tap-effect text-xs text-slate-600 font-bold hover:text-emerald-800 flex items-center gap-0.5">
+                <span>🌐 查看官方展覽</span> &rarr;
+              </a>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function switchVipDay(day) {
+      currentVipDay = day;
+      for (let i = 1; i <= 3; i++) {
+        const btn = document.getElementById(`vipDayBtn-${i}`);
+        if (i === day) {
+          btn.className = "flex-1 py-2 text-center rounded-xl bg-white text-emerald-800 shadow-sm transition-all";
+        } else {
+          btn.className = "flex-1 py-2 text-center rounded-xl transition-all";
+        }
+      }
+      renderVipTimeline();
+    }
+
+    function renderVipInsights() {
+      const container = document.getElementById('vipInsightsList');
+      if (!container) return;
+
+      container.innerHTML = VIP_INSIGHTS.map(ins => `
+        <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200/80 space-y-3">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2">
+              <span class="text-2xl">${ins.emoji}</span>
+              <div>
+                <h3 class="text-sm font-black text-slate-900">${ins.title}</h3>
+                <span class="text-[11px] text-slate-400">📍 ${ins.location}</span>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">${ins.badge}</span>
+          </div>
+
+          <div class="flex items-center justify-between text-[11px] bg-slate-50 px-2.5 py-1 rounded-xl text-slate-500 font-medium">
+            <span>⏰ 參訪時段：<strong>${ins.scheduleTime}</strong></span>
+            ${ins.officialUrl ? `
+              <a href="${ins.officialUrl}" target="_blank" class="tap-effect text-emerald-700 hover:text-emerald-800 font-bold flex items-center gap-0.5">
+                <span>🌐 景點官網</span> &rarr;
+              </a>
+            ` : ''}
+          </div>
+
+          <p class="text-xs text-slate-600 leading-relaxed font-medium bg-slate-50/70 p-2.5 rounded-2xl">${ins.summary}</p>
+
+          <div class="space-y-1.5 text-xs text-slate-700">
+            <div class="text-[11px] font-bold text-emerald-900">【核心觀摩亮點】</div>
+            ${ins.keyPoints.map(p => `
+              <div class="flex items-start gap-1.5 leading-relaxed">
+                <span class="text-emerald-700 font-bold">•</span>
+                <span>${p}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="bg-amber-50/70 p-2.5 rounded-2xl text-xs text-amber-950 border border-amber-200/50">
+            <strong class="text-amber-800 font-bold">🎯 施政效益借鏡：</strong>${ins.takeaway}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function switchVipTab(tabId) {
+      const tabs = ['agenda', 'insights'];
+      tabs.forEach(t => {
+        const el = document.getElementById(`vtab-${t}`);
+        const nav = document.getElementById(`vnav-${t}`);
+        if (t === tabId) {
+          el.classList.remove('hidden');
+          nav.className = "tap-effect flex flex-col items-center justify-center flex-1 py-1.5 text-emerald-800";
+        } else {
+          el.classList.add('hidden');
+          nav.className = "tap-effect flex flex-col items-center justify-center flex-1 py-1.5 text-slate-400 hover:text-slate-600";
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (tabId === 'insights') renderVipInsights();
+    }
+
+    function openSecretaryModal() {
+      openModal('secretaryModal');
+    }
+
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('hidden');
+      }
+    }
+
+    function updateExecutiveLive() {
+      const timeText = document.getElementById('vipCurrentTimeText');
+      if (timeText) {
+        const now = new Date();
+        timeText.innerText = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+      }
+    }
+
+    window.onload = function() {
+      renderVipTimeline();
+      renderVipInsights();
+      updateExecutiveLive();
+      setInterval(updateExecutiveLive, 30000);
+    };
+  </script>
+</body>
+</html>
