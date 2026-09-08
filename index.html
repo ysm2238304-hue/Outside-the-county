@@ -136,6 +136,9 @@
         <button onclick="switchVipDay(3)" id="vipDayBtn-3" class="flex-1 py-2 text-center rounded-xl transition-all">第三天 9/11(五)</button>
       </div>
 
+      <!-- 3 日氣候預報卡容器 (連動當地天候、溫差與著裝防曬叮嚀) -->
+      <div id="vipWeatherCardContainer"></div>
+
       <!-- 座車識別卡 (保留車牌與司機姓名，移除電話與撥打按鈕，呈現純淨識別) -->
       <div class="bg-white border border-slate-200/80 p-3 rounded-2xl flex items-center justify-between text-xs shadow-sm">
         <div class="flex items-center gap-2.5">
@@ -240,7 +243,7 @@
   </div>
 
   <script>
-    // 3 日精華行程資料庫 (保留車牌與司機姓名，電話脫敏)
+    // 3 日精華行程資料庫 (保留車牌與司機姓名，電話脫敏，文案去敏感化)
     const VIP_SCHEDULE = [
       {
         day: 1,
@@ -295,7 +298,7 @@
             location: "臺東縣臺東市鐵花路296號",
             desc: "抵達飯店辦理入住，漫步鐵花村文創商圈。提醒：全館落實環保標章不提供一次性備品。",
             mapQuery: "旅人驛站 鐵道館",
-            badge: "飯店入住"
+            badge: "環保標章旅宿"
           }
         ]
       },
@@ -429,7 +432,7 @@
       }
     ];
 
-    // 參訪景點導覽資料庫 (已完全依照 3 日行程先後時序重新排序：科工館第一、小野柳移至方舟館前)
+    // 參訪景點導覽資料庫 (已完全依照 3 日行程先後時序重新排序：科工館第一、小野柳移至方舟館前且換為 🏞️ 圖標)
     const VIP_INSIGHTS = [
       {
         title: "國立科學工藝博物館：綠博物館示範營運",
@@ -551,6 +554,105 @@
     let vipEggClicks = 0;
     let vipLastClickTime = 0;
     let showVipDemoControls = false;
+
+    // 3 日氣候預報資料庫（整合氣候常態、降雨機率、紫外線指數與禮賓著裝叮嚀）
+    const VIP_WEATHER_DATA = {
+      1: {
+        region: "高雄 · 屏東東港 · 台東市",
+        icon: "🌤️",
+        condition: "多雲時晴",
+        tempRange: "27°C ~ 33°C",
+        rainProb: "20%",
+        uv: "UV 8 過量級",
+        advice: "沿海日照強烈、展館冷氣較強，建議隨身攜帶薄外套防溫差。",
+        lat: 22.46,
+        lon: 120.45
+      },
+      2: {
+        region: "台東市 · 南迴公路 · 恆春墾丁",
+        icon: "☀️",
+        condition: "晴朗炎熱",
+        tempRange: "26°C ~ 33°C",
+        rainProb: "10%",
+        uv: "UV 10 危險級",
+        advice: "富岡地質公園與戶外日照充足，建議備妥防曬用品並適時補充水份。",
+        lat: 22.75,
+        lon: 121.14
+      },
+      3: {
+        region: "恆春墾丁 · 屏東枋山 · 台南市",
+        icon: "🌦️",
+        condition: "晴午後局部短暫雨",
+        tempRange: "27°C ~ 33°C",
+        rainProb: "30%",
+        uv: "UV 7 高量級",
+        advice: "午後南部近山區易有局部對流雨，建議隨身攜帶晴雨折傘備用。",
+        lat: 21.94,
+        lon: 120.79
+      }
+    };
+
+    function renderVipWeather(day) {
+      const container = document.getElementById('vipWeatherCardContainer');
+      if (!container) return;
+
+      const w = VIP_WEATHER_DATA[day] || VIP_WEATHER_DATA[1];
+
+      container.innerHTML = `
+        <div class="bg-gradient-to-r from-sky-50 via-teal-50/50 to-emerald-50 border border-sky-200/80 p-3 rounded-2xl shadow-sm space-y-1.5 transition-all animate-scale-up">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5 min-w-0">
+              <span class="text-xl flex-shrink-0">${w.icon}</span>
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-black text-slate-800 truncate">${w.region}</span>
+                  <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-1.5 py-0.2 rounded">${w.condition}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-1.5 flex-shrink-0">
+              <span class="text-xs font-mono font-black text-emerald-800">${w.tempRange}</span>
+              <span class="text-[10px] text-sky-700 font-bold bg-white/90 px-1.5 py-0.5 rounded-lg border border-sky-200/80 flex items-center gap-0.5">
+                <svg class="w-3 h-3 text-sky-500" fill="currentColor" viewBox="0 0 20 20"><path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"/></svg>
+                <span>降雨 ${w.rainProb}</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="pt-1 border-t border-sky-200/50 flex items-center justify-between text-[11px]">
+            <div class="flex items-center gap-1 text-slate-600 truncate mr-2">
+              <span class="text-amber-700 font-bold flex-shrink-0">💡 禮賓叮嚀：</span>
+              <span class="truncate text-slate-600">${w.advice}</span>
+            </div>
+            <span class="text-[10px] font-bold text-amber-800 bg-amber-100/70 border border-amber-200/80 px-1.5 py-0.2 rounded-md flex-shrink-0">${w.uv}</span>
+          </div>
+        </div>
+      `;
+
+      // 嘗試於背景非同步連線 Open-Meteo API，若有連網則自動微調當日氣溫
+      fetchLiveWeatherUpdate(day, w);
+    }
+
+    async function fetchLiveWeatherUpdate(day, fallbackData) {
+      if (!navigator.onLine) return;
+      try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${fallbackData.lat}&longitude=${fallbackData.lon}&current=temperature_2m,relative_humidity_2m,precipitation_probability&timezone=Asia%2FTaipei`;
+        const res = await fetch(url);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data && data.current) {
+          const liveTemp = Math.round(data.current.temperature_2m);
+          // 若取得當前氣溫，動態微調溫度標籤
+          const tempEl = document.querySelector('#vipWeatherCardContainer .text-emerald-800');
+          if (tempEl) {
+            tempEl.innerText = `${liveTemp}°C (${fallbackData.tempRange})`;
+          }
+        }
+      } catch (e) {
+        // 遇異常靜默略過，維持預設氣候數值
+      }
+    }
 
     function getAllVipEvents() {
       const events = [];
@@ -802,6 +904,7 @@
           btn.className = "flex-1 py-2 text-center rounded-xl transition-all";
         }
       }
+      renderVipWeather(day);
       renderVipTimeline();
     }
 
@@ -936,6 +1039,7 @@
     }
 
     window.onload = function() {
+      renderVipWeather(currentVipDay);
       renderVipTimeline();
       renderVipInsights();
       // 每 30 秒自動刷新一次焦點卡動態
