@@ -136,22 +136,19 @@
         <button onclick="switchVipDay(3)" id="vipDayBtn-3" class="flex-1 py-2 text-center rounded-xl transition-all">第三天 9/11(五)</button>
       </div>
 
-      <!-- 遊覽車與司機尊榮聯絡卡 -->
+      <!-- 座車識別卡 (保留車牌與司機姓名，移除電話與撥打按鈕，呈現純淨識別) -->
       <div class="bg-white border border-slate-200/80 p-3 rounded-2xl flex items-center justify-between text-xs shadow-sm">
         <div class="flex items-center gap-2.5">
-          <span class="p-2 bg-amber-100 text-amber-800 rounded-xl font-bold text-base">🚌</span>
+          <span class="p-2 bg-emerald-100 text-emerald-800 rounded-xl font-bold text-base">🚌</span>
           <div>
             <div class="font-bold text-slate-800 flex items-center gap-1.5">
               <span>本次座車：</span>
-              <span class="font-mono text-emerald-800 font-black px-1.5 py-0.5 bg-emerald-50 rounded border border-emerald-200">KAA-5836</span>
+              <span class="font-mono text-emerald-800 font-black px-2 py-0.5 bg-emerald-50 rounded-lg border border-emerald-200">KAA-5836</span>
             </div>
-            <div class="text-[11px] text-slate-500 mt-0.5">隨車司機：張雋泓 先生 (0911-107351)</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">隨車司機：張雋泓 先生</div>
           </div>
         </div>
-        <a href="tel:0911107351" class="tap-effect px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold shadow-sm flex items-center gap-1">
-          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"/></svg>
-          <span>撥打</span>
-        </a>
+        <span class="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-xl text-[11px] font-bold border border-slate-200">專屬座車</span>
       </div>
 
       <!-- 行程內容清單容器 -->
@@ -165,7 +162,7 @@
           <span class="p-2 bg-emerald-800 text-white rounded-2xl text-lg">🗺️</span>
           <div>
             <h2 class="text-sm font-black text-emerald-950">參訪景點導覽與觀摩特色</h2>
-            <p class="text-[11px] text-slate-600">彙整各站自然生態、AIoT 智慧公廁與永續低碳示範場域亮點</p>
+            <p class="text-[11px] text-slate-600">依 3 日行程順序彙整自然生態、AIoT 智慧公廁與永續低碳示範亮點</p>
           </div>
         </div>
       </div>
@@ -199,7 +196,7 @@
     </div>
   </nav>
 
-  <!-- 彈跳視窗：隨團專屬秘書服務 (Secretary Modal) -->
+  <!-- 彈跳視窗：隨團專屬秘書服務 (全面收斂至大立專責團隊，免去長官被群組推播干擾) -->
   <div id="secretaryModal" onclick="handleBackdropClick(event, 'secretaryModal')" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-sm w-full p-5 shadow-2xl space-y-4 animate-scale-up" onclick="event.stopPropagation()">
       <div class="flex items-center justify-between border-b pb-3 border-slate-100">
@@ -216,16 +213,7 @@
       </div>
 
       <div class="space-y-2.5">
-        <!-- 隨車司機窗口 -->
-        <a href="tel:0911107351" class="tap-effect flex items-center justify-between p-3 rounded-2xl bg-amber-50/80 border border-amber-200">
-          <div>
-            <div class="text-xs font-bold text-amber-900">張雋泓 先生 (遊覽車 KAA-5836)</div>
-            <div class="text-[11px] text-slate-500">主責：全團交通接駁、隨車上下定位</div>
-          </div>
-          <span class="px-3 py-1.5 bg-amber-600 text-white rounded-xl text-xs font-bold shadow-sm">撥打專線</span>
-        </a>
-
-        <a href="tel:0977228459" class="tap-effect flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-200">
+        <a href="tel:0977228459" class="tap-effect flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
           <div>
             <div class="text-xs font-bold text-slate-800">陳宛君 計畫工程師</div>
             <div class="text-[11px] text-slate-500">主責：住宿飯店、各館導覽、總協調</div>
@@ -233,7 +221,7 @@
           <span class="px-3 py-1.5 bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm">撥打專線</span>
         </a>
 
-        <a href="tel:0919057275" class="tap-effect flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-200">
+        <a href="tel:0919057275" class="tap-effect flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
           <div>
             <div class="text-xs font-bold text-slate-800">吳宜佳 計畫工程師</div>
             <div class="text-[11px] text-slate-500">主責：餐廳用餐、智慧公廁參訪安排</div>
@@ -242,12 +230,7 @@
         </a>
       </div>
 
-      <div class="pt-1">
-        <a href="https://line.me/ti/g/CUUB5QP47D" target="_blank" class="tap-effect w-full py-3 bg-[#06C755] text-white rounded-2xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm">
-          <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M24 10.3c0-4.6-4.9-8.3-11-8.3S2 5.7 2 10.3c0 4.1 3.6 7.6 8.6 8.2.3.1.8.2.9.6.1.3.1.8 0 1.1 0 0-.2 1.2-.2 1.4-.1.4-.3 1.6 1.4.9 1.7-.7 9.2-5.4 9.2-8.2"/></svg>
-          <span>進入 LINE 官方交流群組</span>
-        </a>
-      </div>
+      <p class="text-[11px] text-slate-400 text-center pt-1">若有座車調度、餐飲調整或住宿備品需求，歡迎隨時撥打</p>
     </div>
   </div>
 
@@ -257,7 +240,7 @@
   </div>
 
   <script>
-    // 3 日精華行程資料庫 (已校準最新網址、車牌、司機資訊與名坂奇介紹)
+    // 3 日精華行程資料庫 (保留車牌與司機姓名，電話脫敏)
     const VIP_SCHEDULE = [
       {
         day: 1,
@@ -268,7 +251,7 @@
             time: "08:00 - 08:30",
             title: "南投縣政府縣民廣場 (集合、出發)",
             location: "南投縣南投市中興路660號",
-            desc: "長官同仁集合出發，備有麥當勞暖胃早餐與茶水。本次座車：KAA-5836（司機：張雋泓 0911-107351）。",
+            desc: "長官同仁集合出發，備有麥當勞暖胃早餐與茶水。本次座車：KAA-5836（司機：張雋泓 先生）。",
             mapQuery: "南投縣政府縣民廣場",
             badge: "出發集合"
           },
@@ -446,14 +429,28 @@
       }
     ];
 
-    // 參訪景點導覽資料庫
+    // 參訪景點導覽資料庫 (已完全依照 3 日行程先後時序重新排序：科工館第一、小野柳移至方舟館前)
     const VIP_INSIGHTS = [
+      {
+        title: "國立科學工藝博物館：綠博物館示範營運",
+        badge: "公共建築節能低碳",
+        emoji: "🏛️",
+        location: "高雄市三民區九如一路720號",
+        scheduleTime: "Day 1 (9/9) 10:50 - 12:20",
+        officialUrl: "https://www.nstm.gov.tw/",
+        summary: "南台灣首座國立社教機構，致力落實『綠博物館 (Green Museum)』願景，展示環境保護與全球氣候變遷專區。",
+        keyPoints: [
+          "智慧能源排程：常設展區照明與中央空調連動客流感測，展區無人時自動降載 40%。",
+          "中水雨水再利用：全館建立完整雨水收集與雜排水過濾系統，室外景觀綠地灌溉 100% 零自來水消耗。"
+        ],
+        takeaway: "可供本縣工務處及各鄉鎮市公所公有展館改善既有建築能耗之規劃參考。"
+      },
       {
         title: "大鵬灣國家風景區：AIoT 智慧公廁系統",
         badge: "智慧公廁觀摩核心",
         emoji: "🚻",
         location: "屏東縣東港鎮大潭路169號",
-        scheduleTime: "9/9(三) 14:30 - 15:30",
+        scheduleTime: "Day 1 (9/9) 14:30 - 15:30",
         officialUrl: "https://www.dbnsa.gov.tw/",
         summary: "全台風景區導入物聯網感測標竿。整合人流計數、耗材餘量及異味感測連動抽風，實現以數據為導向的『智慧派工』。",
         keyPoints: [
@@ -464,53 +461,11 @@
         takeaway: "可借鏡於南投縣日月潭、清境農場等假日高承載風景區公廁之設備升級改造。"
       },
       {
-        title: "台東永續方舟館：SDGs 在地實踐與循環經濟",
-        badge: "環境永續指標基地",
-        emoji: "🌱",
-        location: "臺東縣臺東市臨海路一段525號",
-        scheduleTime: "9/10(四) 10:10 - 11:30",
-        officialUrl: "https://www.zztaitung.com/21352/ttepb-3",
-        summary: "以聯合國永續發展目標 (SDGs) 為藍圖，生動呈現地方政府在廢棄物自主處理、生廚餘資源化與減塑推廣的具體政績。",
-        keyPoints: [
-          "生廚餘黑水虻循環：推動高效生物堆肥，將農業果菜殘渣轉化為高品質有機肥料。",
-          "沉浸數位互動：將複雜的環保數據轉化為直覺互動裝置，兼具教育與政策展示效益。"
-        ],
-        takeaway: "可作為南投縣發展茶產業有機廢棄物、竹林剩餘資材生質能循環再利用之推廣範本。"
-      },
-      {
-        title: "國立海洋生物博物館：海洋生態多樣性與永續保育",
-        badge: "海洋保育示範教育",
-        emoji: "🐋",
-        location: "屏東縣車城鄉後灣路2號",
-        scheduleTime: "9/11(五) 10:10 - 12:00",
-        officialUrl: "https://www.nmmba.gov.tw/",
-        summary: "台灣規模最大之海洋生態殿堂。全方位展示台灣水域、珊瑚王國與世界水域，宣導源頭減塑及海洋資源永續觀念。",
-        keyPoints: [
-          "特色解說時段：參訪期間推薦欣賞 10:30 觸摸池開放、11:00 珊瑚王國與魚共舞或企鵝餵食解說。",
-          "大型場館管理：觀摩高密度遊客承載下之高頻清潔派工、雨水中水回收與場館節能低碳策略。"
-        ],
-        takeaway: "借鏡其大型公眾場域之動線導引規劃與源頭減塑（全面不提供一次性塑膠袋）推行策略。"
-      },
-      {
-        title: "國立科學工藝博物館：綠博物館示範營運",
-        badge: "公共建築節能低碳",
-        emoji: "🏛️",
-        location: "高雄市三民區九如一路720號",
-        scheduleTime: "9/9(三) 10:50 - 12:20",
-        officialUrl: "https://www.nstm.gov.tw/",
-        summary: "南台灣首座國立社教機構，致力落實『綠博物館 (Green Museum)』願景，展示環境保護與全球氣候變遷專區。",
-        keyPoints: [
-          "智慧能源排程：常設展區照明與中央空調連動客流感測，展區無人時自動降載 40%。",
-          "中水雨水再利用：全館建立完整雨水收集與雜排水過濾系統，室外景觀綠地灌溉 100% 零自來水消耗。"
-        ],
-        takeaway: "可供本縣工務處及各鄉鎮市公所公有展館改善既有建築能耗之規劃參考。"
-      },
-      {
         title: "富岡地質公園 (小野柳)：海岸地質保育與耐候工法",
         badge: "地質生態與耐候維護",
         emoji: "🪨",
         location: "臺東縣臺東市松江路一段500號",
-        scheduleTime: "9/10(四) 09:00 - 10:00",
+        scheduleTime: "Day 2 (9/10) 09:00 - 10:00",
         officialUrl: "https://www.eastcoast-nsa.gov.tw/",
         summary: "東部海岸厚層砂岩與頁岩互層之奇岩地景，觀摩高鹽、強海風極端天候環境下之公共步道抗腐蝕工法。",
         keyPoints: [
@@ -520,11 +475,25 @@
         takeaway: "適合南投縣高山潮濕林區及戶外風景區步道、景觀公廁耐用硬體採購標準參考。"
       },
       {
+        title: "台東永續方舟館：SDGs 在地實踐與循環經濟",
+        badge: "環境永續指標基地",
+        emoji: "🌱",
+        location: "臺東縣臺東市臨海路一段525號",
+        scheduleTime: "Day 2 (9/10) 10:10 - 11:30",
+        officialUrl: "https://www.zztaitung.com/21352/ttepb-3",
+        summary: "以聯合國永續發展目標 (SDGs) 為藍圖，生動呈現地方政府在廢棄物自主處理、生廚餘資源化與減塑推廣的具體政績。",
+        keyPoints: [
+          "生廚餘黑水虻循環：推動高效生物堆肥，將農業果菜殘渣轉化為高品質有機肥料。",
+          "沉浸數位互動：將複雜的環保數據轉化為直覺互動裝置，兼具教育與政策展示效益。"
+        ],
+        takeaway: "可作為南投縣發展茶產業有機廢棄物、竹林剩餘資材生質能循環再利用之推廣範本。"
+      },
+      {
         title: "台東糖廠文化創意產業園區",
         badge: "空間活化低碳地景",
         emoji: "🏭",
         location: "臺東縣臺東市中興路二段191號",
-        scheduleTime: "9/10(四) 13:00 - 14:00",
+        scheduleTime: "Day 2 (9/10) 13:00 - 14:00",
         officialUrl: "https://www.taisugar.com.tw/",
         summary: "公營事業歷史資產轉型為地方創生園區，保留歷史工業紋理並融入友善如廁設施與在地工藝。",
         keyPoints: [
@@ -538,7 +507,7 @@
         badge: "友善通用公路驛站",
         emoji: "🌊",
         location: "臺東縣大武鄉環港路56號",
-        scheduleTime: "9/10(四) 15:20 - 16:10",
+        scheduleTime: "Day 2 (9/10) 15:20 - 16:10",
         officialUrl: "https://tour.taitung.gov.tw/zh-tw/attraction/details/1375",
         summary: "南迴公路最具規模之指標型休息驛站，提供大客車停等空間、在地小農市集與五星友善公廁。",
         keyPoints: [
@@ -548,11 +517,25 @@
         takeaway: "可作為南投縣台 14 線、台 21 線重要公路休憩站點之規劃借鏡。"
       },
       {
+        title: "國立海洋生物博物館：海洋生態多樣性與永續保育",
+        badge: "海洋保育示範教育",
+        emoji: "🐋",
+        location: "屏東縣車城鄉後灣路2號",
+        scheduleTime: "Day 3 (9/11) 10:10 - 12:00",
+        officialUrl: "https://www.nmmba.gov.tw/",
+        summary: "台灣規模最大之海洋生態殿堂。全方位展示台灣水域、珊瑚王國與世界水域，宣導源頭減塑及海洋資源永續觀念。",
+        keyPoints: [
+          "特色解說時段：參訪期間推薦欣賞 10:30 觸摸池開放、11:00 珊瑚王國與魚共舞或企鵝餵食解說。",
+          "大型場館管理：觀摩高密度遊客承載下之高頻清潔派工、雨水中水回收與場館節能低碳策略。"
+        ],
+        takeaway: "借鏡其大型公眾場域之動線導引規劃與源頭減塑（全面不提供一次性塑膠袋）推行策略。"
+      },
+      {
         title: "台南名坂奇洋菓子：在地特色物產伴手禮",
         badge: "地方品牌與包裝減量",
         emoji: "🧁",
         location: "臺南市東區裕信路321號",
-        scheduleTime: "9/11(五) 15:00 - 15:40",
+        scheduleTime: "Day 3 (9/11) 15:00 - 15:40",
         officialUrl: "https://www.minbenchi.com.tw/",
         summary: "源於2007年，以專注於夏威夷豆塔的製作而聞名，成為台南知名伴手禮名店。",
         keyPoints: [
