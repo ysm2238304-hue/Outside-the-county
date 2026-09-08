@@ -558,35 +558,35 @@
     // 3 日氣候預報資料庫（整合氣候常態、降雨機率、紫外線指數與禮賓著裝叮嚀）
     const VIP_WEATHER_DATA = {
       1: {
-        region: "高雄 · 屏東東港 · 台東市",
+        region: "高雄 · 東港 · 台東",
         icon: "🌤️",
         condition: "多雲時晴",
         tempRange: "27°C ~ 33°C",
         rainProb: "20%",
-        uv: "UV 8 過量級",
-        advice: "沿海日照強烈、展館冷氣較強，建議隨身攜帶薄外套防溫差。",
+        uv: "UV 8 過量",
+        advice: "沿海日照強、展館冷氣較強，建議隨身攜帶薄外套防溫差。",
         lat: 22.46,
         lon: 120.45
       },
       2: {
-        region: "台東市 · 南迴公路 · 恆春墾丁",
+        region: "台東 · 南迴 · 恆春",
         icon: "☀️",
         condition: "晴朗炎熱",
         tempRange: "26°C ~ 33°C",
         rainProb: "10%",
-        uv: "UV 10 危險級",
-        advice: "富岡地質公園與戶外日照充足，建議備妥防曬用品並適時補充水份。",
+        uv: "UV 10 危險",
+        advice: "富岡地質公園與戶外日照強烈，請備妥防曬用品並適時補充水分。",
         lat: 22.75,
         lon: 121.14
       },
       3: {
-        region: "恆春墾丁 · 屏東枋山 · 台南市",
+        region: "恆春 · 枋山 · 台南",
         icon: "🌦️",
-        condition: "晴午後局部短暫雨",
+        condition: "午後局部雨",
         tempRange: "27°C ~ 33°C",
         rainProb: "30%",
-        uv: "UV 7 高量級",
-        advice: "午後南部近山區易有局部對流雨，建議隨身攜帶晴雨折傘備用。",
+        uv: "UV 7 高量",
+        advice: "午後南部近山區易有短暫對流雨，建議隨身攜帶晴雨折傘備用。",
         lat: 21.94,
         lon: 120.79
       }
@@ -599,33 +599,31 @@
       const w = VIP_WEATHER_DATA[day] || VIP_WEATHER_DATA[1];
 
       container.innerHTML = `
-        <div class="bg-gradient-to-r from-sky-50 via-teal-50/50 to-emerald-50 border border-sky-200/80 p-3 rounded-2xl shadow-sm space-y-1.5 transition-all animate-scale-up">
-          <div class="flex items-center justify-between">
+        <div class="bg-gradient-to-r from-sky-50 via-teal-50/50 to-emerald-50 border border-sky-200/80 p-3 rounded-2xl shadow-sm space-y-2 transition-all">
+          <!-- 第一層：天候狀態、地區與即時數據 (強制不折行與空間平衡) -->
+          <div class="flex items-center justify-between gap-1.5">
             <div class="flex items-center gap-1.5 min-w-0">
-              <span class="text-xl flex-shrink-0">${w.icon}</span>
-              <div class="min-w-0">
-                <div class="flex items-center gap-1.5">
-                  <span class="text-xs font-black text-slate-800 truncate">${w.region}</span>
-                  <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-1.5 py-0.2 rounded">${w.condition}</span>
-                </div>
-              </div>
+              <span class="text-xl flex-shrink-0 leading-none">${w.icon}</span>
+              <span class="text-xs font-black text-slate-800 truncate">${w.region}</span>
+              <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-1.5 py-0.5 rounded whitespace-nowrap flex-shrink-0">${w.condition}</span>
             </div>
             
             <div class="flex items-center gap-1.5 flex-shrink-0">
-              <span class="text-xs font-mono font-black text-emerald-800">${w.tempRange}</span>
-              <span class="text-[10px] text-sky-700 font-bold bg-white/90 px-1.5 py-0.5 rounded-lg border border-sky-200/80 flex items-center gap-0.5">
-                <svg class="w-3 h-3 text-sky-500" fill="currentColor" viewBox="0 0 20 20"><path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"/></svg>
+              <span id="vipLiveTempText" class="text-xs font-mono font-black text-emerald-800 whitespace-nowrap">${w.tempRange}</span>
+              <span class="text-[10px] text-sky-700 font-bold bg-white/90 px-1.5 py-0.5 rounded-lg border border-sky-200/80 flex items-center gap-0.5 whitespace-nowrap">
+                <svg class="w-3 h-3 text-sky-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"/></svg>
                 <span>降雨 ${w.rainProb}</span>
               </span>
             </div>
           </div>
 
-          <div class="pt-1 border-t border-sky-200/50 flex items-center justify-between text-[11px]">
-            <div class="flex items-center gap-1 text-slate-600 truncate mr-2">
-              <span class="text-amber-700 font-bold flex-shrink-0">💡 禮賓叮嚀：</span>
-              <span class="truncate text-slate-600">${w.advice}</span>
+          <!-- 第二層：禮賓叮嚀 (完整呈現不截斷) 與 紫外線等級 -->
+          <div class="pt-1.5 border-t border-sky-200/60 flex items-start justify-between gap-2 text-xs">
+            <div class="flex items-start gap-1 text-slate-600 leading-snug flex-1">
+              <span class="text-amber-700 font-bold whitespace-nowrap flex-shrink-0 text-[11px]">💡 禮賓叮嚀：</span>
+              <span class="text-[11px] text-slate-600">${w.advice}</span>
             </div>
-            <span class="text-[10px] font-bold text-amber-800 bg-amber-100/70 border border-amber-200/80 px-1.5 py-0.2 rounded-md flex-shrink-0">${w.uv}</span>
+            <span class="text-[10px] font-bold text-amber-800 bg-amber-100/80 border border-amber-200/80 px-1.5 py-0.5 rounded-md whitespace-nowrap flex-shrink-0 mt-0.5">${w.uv}</span>
           </div>
         </div>
       `;
@@ -643,8 +641,8 @@
         const data = await res.json();
         if (data && data.current) {
           const liveTemp = Math.round(data.current.temperature_2m);
-          // 若取得當前氣溫，動態微調溫度標籤
-          const tempEl = document.querySelector('#vipWeatherCardContainer .text-emerald-800');
+          // 若取得當前氣溫，動態微調溫度標籤，維持簡練精準排版
+          const tempEl = document.getElementById('vipLiveTempText');
           if (tempEl) {
             tempEl.innerText = `${liveTemp}°C (${fallbackData.tempRange})`;
           }
